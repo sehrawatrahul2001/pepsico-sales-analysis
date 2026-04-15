@@ -96,7 +96,7 @@ def load_sales_data(path: Path | str = DATA_PATH) -> pd.DataFrame:
     dataframe.columns = (
         dataframe.columns.str.strip().str.lower().str.replace(" ", "_").str.replace(r"[^a-z0-9_]", "", regex=True)
     )
-    dataframe["order_date"] = pd.to_datetime(dataframe["order_date"])
+    dataframe["order_date"] = pd.to_datetime(dataframe["order_date"], dayfirst=True)
     dataframe["month"] = dataframe["order_date"].dt.to_period("M").astype(str)
     dataframe["quarter"] = dataframe["order_date"].dt.to_period("Q").astype(str)
     dataframe["day_name"] = dataframe["order_date"].dt.day_name()
