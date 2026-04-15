@@ -68,3 +68,11 @@ python3 python/pepsico_sales_performance_analysis.py
 ## Why This Project Stands Out
 
 This portfolio piece is framed like a monthly business review rather than a notebook exercise. It reflects Rahul Sehrawat's operations background by focusing on market execution, demand planning, portfolio concentration, and decision-ready communication.
+
+## Dataset Note
+
+The original datasets used in this project were large and simulated real-world business scenarios.
+
+Due to GitHub file size limitations, full datasets are not included in this repository.
+
+However, all analysis, processed outputs, and insights are fully available to demonstrate the complete workflow and business impact.
