@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+*.db
+*.pbix
+.DS_Store
