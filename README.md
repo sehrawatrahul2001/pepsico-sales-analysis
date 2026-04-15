@@ -76,3 +76,17 @@ The original datasets used in this project were large and simulated real-world b
 Due to GitHub file size limitations, full datasets are not included in this repository.
 
 However, all analysis, processed outputs, and insights are fully available to demonstrate the complete workflow and business impact.
+
+## ⚙️ How to Run the Project
+
+### 1. Clone the repository
+git clone https://github.com/sehrawatrahul2001/pepsico-sales-analysis.git
+
+### 2. Navigate to project folder
+cd pepsico-sales-analysis
+
+### 3. Install required libraries
+pip3 install pandas numpy matplotlib seaborn plotly openpyxl
+
+### 4. Run the Python script
+python3 python/pepsico_sales_performance_analysis.py
