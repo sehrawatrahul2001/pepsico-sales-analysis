@@ -1,5 +1,17 @@
 __pycache__/
+**/__pycache__/
 *.pyc
 *.db
+*.xlsx
 *.pbix
 .DS_Store
+
+data/raw/**
+!data/raw/README.md
+
+*.csv
+!data/sample/*.csv
+!data/processed/*.csv
+
+data/processed/pepsico_sales_cleaned.csv
+data/data_sources.json

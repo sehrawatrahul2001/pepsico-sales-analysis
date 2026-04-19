@@ -1,0 +1,4 @@
+forecast_month,forecast_revenue_inr,forecast_method
+2026-01,1520041.36,linear_trend_baseline
+2026-02,1074246.37,linear_trend_baseline
+2026-03,628451.38,linear_trend_baseline

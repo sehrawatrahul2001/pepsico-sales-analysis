@@ -1,92 +1,143 @@
 # PepsiCo Sales Performance & Business Insights Analysis
 
-This project presents a business-first sales analytics case built around PepsiCo's beverage portfolio. It was developed by **Rahul Sehrawat**, **Assistant Manager (Operations)**, to show how revenue, market execution, product mix, and time-based demand signals can be translated into a leadership-ready commercial review.
+## Business Problem
 
-## Business Objective
+Commercial teams need more than topline sales numbers. They need to know which categories are carrying the business, which states deserve incremental investment, whether order-value mix is improving, and how recent demand signals should influence planning. This project converts order-level sales data into a leadership-ready growth and performance review.
 
-The project is designed to answer the questions a sales leadership team would care about most:
+## Objective
 
-- which categories and products are carrying revenue
-- which states and cities are the strongest commercial markets
-- how sales performance changes across months, quarters, and days
-- whether growth is coming from volume alone or stronger order-value mix
+Build an end-to-end sales analytics workflow that:
 
-## Project Snapshot
+- resolves a local-only workbook without pushing it to GitHub
+- standardizes sales data and date features
+- measures category, geography, and value-band performance
+- adds monthly trend analysis, anomaly flags, and a simple forecast baseline
 
-| Area | Details |
-|---|---|
-| Project Name | PepsiCo Sales Performance & Business Insights Analysis |
-| Domain | FMCG / beverage sales analytics |
-| Data Scale | 197,430 orders across 29 states and 31 distributors |
-| Tools Used | Python, Pandas, SQL, Excel, Plotly, Power BI |
-| Positioning | Revenue analysis, market review, portfolio mix, commercial storytelling |
+## Dataset Strategy
 
-## Workflow
+- Full workbook: stored locally in `data/raw/` and excluded from GitHub
+- GitHub-safe sample: `data/sample/pepsico_sales_sample.csv`
+- Processed outputs: written to `data/processed/`
+- Automated ingestion options:
+  - local path via `PEPSICO_DATA_PATH`
+  - Google Drive via `data/data_sources.json`
+  - Kaggle via `data/data_sources.json`
+  - sample fallback for GitHub reviewers
 
-1. Excel-based sales data is cleaned and standardized in Python.
-2. KPI, category, product, geography, and time-series analysis is built in the notebook and supporting script.
-3. SQL translates the dataset into repeatable business reporting queries.
-4. Dashboard notes and reports package the results for leadership review.
-
-## Headline Insights
-
-- Total revenue analyzed: **INR 53.01M**
-- Top category: **Carbonated Soft Drink**
-- Top product: **Mountain Dew**
-- Lead market: **Karnataka / Bengaluru**
-- Strongest period: **May 2025** and **Q2 2025**
-- Premium and enterprise orders contribute a disproportionate share of revenue
-
-## Repository Structure
+## Project Structure
 
 ```text
 PepsiCo Sales Performance & Business Insights Analysis/
-├── data/
-├── python/
-├── sql/
+├── assets/
 ├── dashboard/
+├── data/
+│   ├── raw/
+│   ├── sample/
+│   └── processed/
+├── notebooks/
 ├── reports/
+├── scripts/
+│   └── sql/
 ├── README.md
-└── project_storyline.md
+└── requirements.txt
 ```
 
-## Key Files
+## Methodology
 
-- `python/pepsico_sales_performance_analysis.py`
-- `python/pepsico_sales_performance_analysis.ipynb`
-- `sql/pepsico_sales_performance_queries.sql`
-- `dashboard/dashboard_brief.md`
-- `reports/business_problem_report.md`
-- `reports/final_insights_report.md`
+1. Bootstrap the raw workbook from local storage, Google Drive, Kaggle, or sample data.
+2. Standardize columns and engineer month, quarter, and day-level fields.
+3. Segment transactions into `Budget`, `Core`, `Premium`, and `Enterprise` order-value bands.
+4. Build KPI, category, state, and value-band summaries.
+5. Create monthly trend outputs with anomaly checks and a baseline 3-period revenue forecast.
+6. Export processed data and dashboard-ready assets for recruiter review.
+
+## KPIs Used
+
+- Total Revenue
+- Total Orders
+- Average Order Value
+- Average Rating
+- Top Category
+- Top Product
+- Top State
+- Revenue by Value Band
+- Monthly Revenue Trend
+- Forecast Revenue Baseline
+
+## Key Insights
+
+- The dataset contains **197,430 orders** and **INR 53.01M** in revenue.
+- `Carbonated Soft Drink` and `Juice` together generate **INR 29.79M**, or roughly **56.2%** of revenue.
+- `Karnataka` is the lead state with **INR 5.46M**, contributing **10.29%** of total revenue.
+- `Premium` and `Enterprise` orders contribute **INR 36.01M**, or about **67.9%** of the revenue mix.
+- The business peaks in **May 2025** at **INR 5.96M**, while the baseline forecast softens materially into early 2026, signalling the need for active demand planning.
+
+## Business Recommendations
+
+- Protect the highest-revenue categories and products with stronger distributor execution and inventory planning.
+- Use Karnataka as a benchmark market and selectively replicate its execution model into second-tier states.
+- Push order-value mix upward by converting `Core` orders into `Premium` bundles, distributor incentives, or channel offers.
+
+## Measurable Business Impact
+
+If PepsiCo shifts **5%** of current `Core` revenue into `Premium` pricing or mix, it would create approximately **INR 752K** in higher-value revenue.
+
+## Dashboard Screenshot
+
+![PepsiCo Sales Overview](assets/pepsico_sales_overview.png)
 
 ## How To Run
 
+### 1. Install dependencies
+
 ```bash
-python3 python/pepsico_sales_performance_analysis.py
+python3 -m pip install -r requirements.txt
 ```
 
-## Why This Project Stands Out
+### 2. Choose a data path
 
-This portfolio piece is framed like a monthly business review rather than a notebook exercise. It reflects Rahul Sehrawat's operations background by focusing on market execution, demand planning, portfolio concentration, and decision-ready communication.
+Option A: use the full local workbook
 
-## Dataset Note
+```bash
+python3 scripts/bootstrap_data.py
+```
 
-The original datasets used in this project were large and simulated real-world business scenarios.
+Option B: configure Google Drive or Kaggle
 
-Due to GitHub file size limitations, full datasets are not included in this repository.
+```bash
+cp data/data_sources.example.json data/data_sources.json
+python3 scripts/bootstrap_data.py
+```
 
-However, all analysis, processed outputs, and insights are fully available to demonstrate the complete workflow and business impact.
+Option C: use the GitHub-safe sample
 
-## ⚙️ How to Run the Project
+```bash
+python3 scripts/pepsico_sales_performance_analysis.py --use-sample
+```
 
-### 1. Clone the repository
-git clone https://github.com/sehrawatrahul2001/pepsico-sales-analysis.git
+### 3. Run the full workflow
 
-### 2. Navigate to project folder
-cd pepsico-sales-analysis
+```bash
+python3 scripts/run_pipeline.py
+```
 
-### 3. Install required libraries
-pip3 install pandas numpy matplotlib seaborn plotly openpyxl
+### 4. Export recruiter-facing chart assets
 
-### 4. Run the Python script
-python3 python/pepsico_sales_performance_analysis.py
+```bash
+python3 scripts/export_dashboard_assets.py
+```
+
+## Main Outputs
+
+- `data/processed/pepsico_sales_cleaned.csv`
+- `data/processed/pepsico_monthly_summary.csv`
+- `data/processed/pepsico_revenue_forecast.csv`
+- `data/processed/pepsico_category_summary.csv`
+- `data/processed/pepsico_state_summary.csv`
+- `data/processed/pepsico_value_band_summary.csv`
+
+## Why This Project Is Portfolio-Ready
+
+- Balances business storytelling with reusable analysis outputs.
+- Solves the GitHub large-file issue without uploading the full workbook.
+- Includes trend analysis, order-value segmentation, forecast baseline, and recruiter-facing visuals.

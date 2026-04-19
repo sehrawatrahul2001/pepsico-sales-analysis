@@ -1,0 +1,11 @@
+{
+  "local_file_paths": [
+    "~/Desktop/PepsiCo Sales Analysis.xlsx"
+  ],
+  "direct_url": "",
+  "google_drive_file_id": "",
+  "kaggle": {
+    "dataset": "",
+    "notes": "Use this only if the downloaded workbook keeps the expected pepsico_sales_dataset.xlsx filename."
+  }
+}
